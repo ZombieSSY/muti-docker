@@ -1,4 +1,6 @@
 sudo: required
+language: generic
+
 services:
   - docker
 
@@ -13,11 +15,10 @@ after_success:
   - docker build -t wana/multi-nginx ./nginx
   - docker build -t wana/multi-server ./server
   - docker build -t wana/multi-worker ./worker
-
-# Log in to the docker CLI
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-# Take those images and push them to docker hub
-- docker push wana/multi-client
-- docker push wana/multi-nginx
-- docker push wana/multi-server
-- docker push wana/multi-worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push wana/multi-client
+  - docker push wana/multi-nginx
+  - docker push wana/multi-server
+  - docker push wana/multi-worker
